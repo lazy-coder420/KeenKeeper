@@ -1,36 +1,143 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# KeenKeeper 👫
 
-## Getting Started
+**Keep your friendships strong and never lose touch with people who matter most.**
 
-First, run the development server:
+KeenKeeper is an intuitive friendship management application designed to help you maintain meaningful connections with your friends. Track interactions, set contact goals, and never miss a moment that matters.
+
+---
+
+## 📋 Table of Contents
+
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Key Pages](#key-pages)
+- [Contributing](#contributing)
+
+---
+
+## ✨ Key Features
+
+### 🏠 **Home Page - Friends Dashboard**
+- Browse all your friends in a beautiful 4-column grid layout
+- Real-time status indicators (Overdue, Almost Due, On Track)
+- Quick access to friend profiles
+- Overview statistics
+
+### 👤 **Friend Details Page**
+- Profile card with bio, interests, email
+- Stats cards and relationship goals
+- Quick check-in buttons with toast notifications
+
+### 📱 **Timeline Page**
+- Complete interaction history
+- Filter by type: Calls, Texts, Videos
+- Chronological sorting
+
+### 📊 **Stats Page**
+- Pie chart visualization with Recharts
+- Interaction analytics
+- Detailed statistics
+
+---
+
+## 🛠️ Technologies Used
+
+- **Next.js 16** - Web framework
+- **React.js** - UI components
+- **Tailwind CSS** - Styling
+- **Lucide React** - Icons
+- **Recharts** - Charts & visualizations
+- **Context API** - State management
+
+---
+
+## 🚀 Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/yourusername/keenkeeper.git
+cd keenkeeper
+
+# Install dependencies
+npm install
+npm install lucide-react recharts
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the app.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📖 Usage
 
-## Learn More
+1. **View Friends**: Home page displays all friends
+2. **Check In**: Click friend card → use Quick Check-In buttons
+3. **View Timeline**: See all interactions with filtering
+4. **Analyze**: Visit Stats page for analytics
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📁 Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/
+│   ├── page.jsx              # Home
+│   ├── friend/[id]/page.jsx  # Friend details
+│   ├── timeline/page.jsx     # Timeline with filters
+│   ├── stats/page.jsx        # Analytics
+│   └── NotFound.jsx          # 404 page
+├── components/
+│   ├── Navbar.jsx
+│   ├── Footer.jsx
+│   ├── Banner.jsx
+│   ├── FriendCard.jsx
+│   ├── Loader.jsx
+│   └── Toast.jsx
+├── context/
+│   └── FriendContext.jsx     # State management
+└── data/
+    └── friends.json          # Friend data
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## ✅ Features Implemented
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Main Features
+- ✅ Responsive design (mobile, tablet, desktop)
+- ✅ Navbar with active state highlighting
+- ✅ Friend cards with status indicators
+- ✅ Friend detail page (2-column layout)
+- ✅ Timeline with filters
+- ✅ Stats page with pie chart
+- ✅ Toast notifications
+- ✅ Loading animation
+- ✅ 404 page
+- ✅ Beautiful footer
+
+### Challenge Features
+- ✅ Friendship analytics with Recharts
+- ✅ Timeline filtering by interaction type
+- ✅ Dark mode support
+- ✅ Timeline sorting (newest first)
+
+---
+
+## 🚢 Deployment
+
+Build and deploy to Vercel or any Node.js hosting:
+
+```bash
+npm run build
+npm start
+```
+
+---
+
+**Built with ❤️ to keep friendships strong**
