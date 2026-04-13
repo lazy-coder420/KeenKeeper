@@ -1,71 +1,60 @@
-// import Link from "next/link";
-// import { Heart, Github, Twitter, Mail } from "lucide-react";
+"use client";
 
-// export default function Footer() {
-//   const currentYear = new Date().getFullYear();
+import { FaInstagram, FaFacebookF, FaXTwitter } from "react-icons/fa6";
 
-//   return (
-//     <footer className="bg-gray-900 text-gray-300 mt-20">
-//       <div className="max-w-7xl mx-auto px-4 py-12">
+export default function Footer() {
+  return (
+    <footer className="bg-[#2F5D50] text-white py-16">
+      <div className="max-w-4xl mx-auto text-center px-4">
 
-//         {/* Top Section */}
-//         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        {/* Title */}
+        <h1 className="text-5xl font-bold mb-4">KeenKeeper</h1>
 
-//           {/* Brand */}
-//           <div>
-//             <h2 className="text-white text-xl font-bold mb-3">
-//               KeenKeeper
-//             </h2>
-//             <p className="text-sm text-gray-400">
-//               Keep your friendships strong and never lose touch with people who matter.
-//             </p>
-//           </div>
+        {/* Subtitle */}
+        <p className="text-gray-200 mb-8">
+          Your personal shelf of meaningful connections. Browse, tend, and
+          nurture the relationships that matter most.
+        </p>
 
-//           {/* Links */}
-//           <div>
-//             <h3 className="text-white font-semibold mb-3">Links</h3>
-//             <ul className="space-y-2 text-sm">
-//               <li><Link href="/">Home</Link></li>
-//               <li><Link href="/timeline">Timeline</Link></li>
-//               <li><Link href="/stats">Stats</Link></li>
-//             </ul>
-//           </div>
+        {/* Social Links */}
+        <h3 className="text-lg font-semibold mb-4">Social Links</h3>
 
-//           {/* Features */}
-//           <div>
-//             <h3 className="text-white font-semibold mb-3">Features</h3>
-//             <ul className="space-y-2 text-sm">
-//               <li>Friend Management</li>
-//               <li>Analytics</li>
-//               <li>Reminders</li>
-//               <li>Dashboard</li>
-//             </ul>
-//           </div>
+        <div className="flex justify-center gap-4 mb-10">
+          <a
+            href="#"
+            className="bg-white text-black p-3 rounded-full hover:scale-110 transition"
+          >
+            <FaInstagram size={18} />
+          </a>
 
-//           {/* Social */}
-//           <div>
-//             <h3 className="text-white font-semibold mb-3">Social</h3>
-//             <div className="flex gap-4">
-//               <a href="#"><GitHub size={20} /></a>
-//               <a href="#"><Twitter size={20} /></a>
-//               <a href="#"><Mail size={20} /></a>
-//             </div>
-//           </div>
+          <a
+            href="#"
+            className="bg-white text-black p-3 rounded-full hover:scale-110 transition"
+          >
+            <FaFacebookF size={18} />
+          </a>
 
-//         </div>
+          <a
+            href="#"
+            className="bg-white text-black p-3 rounded-full hover:scale-110 transition"
+          >
+            <FaXTwitter size={18} />
+          </a>
+        </div>
 
-//         {/* Bottom */}
-//         <div className="border-t border-gray-800 pt-6 flex flex-col sm:flex-row justify-between items-center text-sm">
+        {/* Divider */}
+        <div className="border-t border-gray-400/30 pt-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-300 gap-4">
 
-//           <p>© {currentYear} KeenKeeper. All rights reserved.</p>
+          <p>© 2026 KeenKeeper. All rights reserved.</p>
 
-//           <p className="flex items-center gap-2 mt-2 sm:mt-0">
-//             Made with <Heart size={16} className="text-red-500" /> for friendship
-//           </p>
+          <div className="flex gap-6">
+            <a href="#" className="hover:text-white">Privacy Policy</a>
+            <a href="#" className="hover:text-white">Terms of Service</a>
+            <a href="#" className="hover:text-white">Cookies</a>
+          </div>
+        </div>
 
-//         </div>
-
-//       </div>
-//     </footer>
-//   );
-// }
+      </div>
+    </footer>
+  );
+}
