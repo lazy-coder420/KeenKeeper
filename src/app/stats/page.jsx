@@ -37,40 +37,10 @@ export default function StatsPage() {
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
             Friendship Analytics
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
-            Discover your communication patterns with friends
-          </p>
+          
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-            <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">
-              Total Interactions
-            </h3>
-            <p className="text-4xl font-bold text-blue-600 dark:text-blue-400">
-              {totalInteractions}
-            </p>
-          </div>
-
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-            <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">
-              Most Common
-            </h3>
-            <p className="text-4xl font-bold text-purple-600 dark:text-purple-400">
-              {mostCommonType}
-            </p>
-          </div>
-
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-            <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">
-              Interaction Types
-            </h3>
-            <p className="text-4xl font-bold text-green-600 dark:text-green-400">
-              {chartData.length}
-            </p>
-          </div>
-        </div>
+  
 
         {/* Chart Section */}
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
@@ -130,30 +100,7 @@ export default function StatsPage() {
           )}
         </div>
 
-        {/* Interaction Details */}
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {[
-            { type: "Calls", icon: "📞", color: "bg-green-100 dark:bg-green-900", textColor: "text-green-800 dark:text-green-200" },
-            { type: "Texts", icon: "💬", color: "bg-blue-100 dark:bg-blue-900", textColor: "text-blue-800 dark:text-blue-200" },
-            { type: "Videos", icon: "🎥", color: "bg-purple-100 dark:bg-purple-900", textColor: "text-purple-800 dark:text-purple-200" },
-          ].map((item) => {
-            const count = timeline.filter((t) => t.type === item.type).length;
-            return (
-              <div
-                key={item.type}
-                className={`${item.color} rounded-lg shadow-lg p-6 text-center`}
-              >
-                <div className="text-4xl mb-2">{item.icon}</div>
-                <h3 className={`text-lg font-semibold ${item.textColor} mb-2`}>
-                  {item.type}
-                </h3>
-                <p className={`text-3xl font-bold ${item.textColor}`}>
-                  {count}
-                </p>
-              </div>
-            );
-          })}
-        </div>
+    
       </div>
     </main>
   );

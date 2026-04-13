@@ -35,6 +35,7 @@ export const FriendProvider = ({ children }) => {
       JSON.stringify(updated)
     );
   };
+  
 
   return (
     <FriendContext.Provider
