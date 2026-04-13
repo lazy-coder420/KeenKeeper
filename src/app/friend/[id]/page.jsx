@@ -11,29 +11,21 @@ import {
   Archive,
   Trash2,
   Edit,
+  Clock3,
 } from "lucide-react";
 import { useToast, ToastContainer } from "../../../components/Toast";
 
 export default function FriendDetailsPage() {
   const { id } = useParams();
   const { friends, addTimelineEntry } = useFriend();
-  const friend = friends.find((f) => f.id === parseInt(id));
   const { toast, showToast } = useToast();
+
+  const friend = friends.find((f) => f.id === parseInt(id));
 
   if (!friend) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-            Friend not found
-          </h1>
-          <Link
-            href="/"
-            className="text-blue-600 hover:text-blue-800 dark:text-blue-400"
-          >
-            Go back home
-          </Link>
-        </div>
+        <h1 className="text-2xl font-bold">Friend not found</h1>
       </div>
     );
   }
@@ -41,214 +33,184 @@ export default function FriendDetailsPage() {
   const getStatusColor = (status) => {
     switch (status) {
       case "overdue":
-        return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200";
+        return "bg-red-500 text-white";
       case "almost due":
-        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200";
+        return "bg-yellow-500 text-white";
       case "on-track":
-        return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200";
+        return "bg-green-500 text-white";
       default:
-        return "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300";
+        return "bg-gray-400 text-white";
     }
   };
 
   const handleInteraction = (type) => {
     addTimelineEntry(type, friend.name);
+
     const messages = {
       Call: `📞 Called ${friend.name}`,
       Text: `💬 Texted ${friend.name}`,
       Video: `🎥 Video call with ${friend.name}`,
     };
+
     showToast(messages[type], "success");
   };
 
   return (
-    <main className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
+    <main className="min-h-screen bg-gray-100 py-10 px-4">
       <ToastContainer toast={toast} />
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div className="max-w-7xl mx-auto">
         {/* Back Button */}
         <Link
           href="/"
-          className="inline-flex items-center text-blue-600 hover:text-blue-800 dark:text-blue-400 mb-8"
+          className="text-blue-600 font-medium hover:underline mb-6 inline-block"
         >
           ← Back to Friends
         </Link>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Column - Friend Info Card */}
-          <div className="lg:col-span-1">
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-              {/* Profile Picture */}
-              <div className="relative h-48 w-full rounded-lg overflow-hidden mb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* LEFT SIDE */}
+          <div className="space-y-4">
+            <div className="bg-white rounded-2xl shadow p-8 text-center">
+              <div className="flex justify-center">
                 <Image
                   src={friend.picture}
                   alt={friend.name}
-                  fill
-                  className="object-cover"
+                  width={100}
+                  height={100}
+                  className="rounded-full object-cover"
                 />
               </div>
 
-              {/* Name */}
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+              <h1 className="text-4xl font-bold mt-4">
                 {friend.name}
               </h1>
 
-              {/* Status */}
-              <div className="mb-4">
-                <span
-                  className={`inline-block px-4 py-2 rounded-full text-sm font-semibold ${getStatusColor(
-                    friend.status
-                  )}`}
-                >
-                  {friend.status.charAt(0).toUpperCase() +
-                    friend.status.slice(1)}
-                </span>
+              <span
+                className={`inline-block mt-4 px-5 py-2 rounded-full font-semibold ${getStatusColor(
+                  friend.status
+                )}`}
+              >
+                {friend.status}
+              </span>
+
+              <div className="flex justify-center gap-3 mt-4 flex-wrap">
+                {friend.tags.slice(0, 2).map((tag, idx) => (
+                  <span
+                    key={idx}
+                    className="bg-green-100 text-green-700 border border-green-400 px-4 py-1 rounded-full"
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
 
-              {/* Tags */}
-              <div className="mb-6">
-                <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                  Interests
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {friend.tags.map((tag, idx) => (
-                    <span
-                      key={idx}
-                      className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-3 py-1 rounded-full text-xs"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              <p className="text-gray-500 italic mt-6 text-lg leading-8">
+                {friend.bio}
+              </p>
 
-              {/* Bio */}
-              <div className="mb-6">
-                <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                  About
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  {friend.bio}
-                </p>
-              </div>
-
-              {/* Email */}
-              <div className="mb-6">
-                <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                  Email
-                </h3>
-                <a
-                  href={`mailto:${friend.email}`}
-                  className="text-blue-600 hover:text-blue-800 dark:text-blue-400 text-sm"
-                >
-                  {friend.email}
-                </a>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="space-y-2">
-                <button className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 font-semibold transition">
-                  ⏰ Snooze 2 Weeks
-                </button>
-                <button className="w-full bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-white py-2 px-4 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 font-semibold transition">
-                  <Archive className="inline mr-2" size={18} />
-                  Archive
-                </button>
-                <button className="w-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200 py-2 px-4 rounded-lg hover:bg-red-200 dark:hover:bg-red-800 font-semibold transition">
-                  <Trash2 className="inline mr-2" size={18} />
-                  Delete
-                </button>
-              </div>
+              <p className="text-gray-500 mt-6 text-lg">
+                {friend.email}
+              </p>
             </div>
+
+            {/* ACTION BUTTONS */}
+            <button className="w-full bg-white rounded-xl shadow py-4 flex justify-center items-center gap-3 text-xl font-semibold hover:bg-gray-50">
+              <Clock3 size={22} />
+              Snooze 2 Weeks
+            </button>
+
+            <button className="w-full bg-white rounded-xl shadow py-4 flex justify-center items-center gap-3 text-xl font-semibold hover:bg-gray-50">
+              <Archive size={22} />
+              Archive
+            </button>
+
+            <button className="w-full bg-white rounded-xl shadow py-4 flex justify-center items-center gap-3 text-xl font-semibold text-red-500 hover:bg-red-50">
+              <Trash2 size={22} />
+              Delete
+            </button>
           </div>
 
-          {/* Right Column */}
+          {/* RIGHT SIDE */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Stats Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-                <h3 className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                  Days Since Contact
-                </h3>
-                <p className="text-3xl font-bold text-gray-900 dark:text-white">
+            {/* TOP STATS */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="bg-white rounded-2xl shadow p-6 text-center">
+                <h2 className="text-5xl font-bold text-green-900">
                   {friend.days_since_contact}
+                </h2>
+                <p className="text-gray-500 text-xl mt-2">
+                  Days Since Contact
                 </p>
               </div>
 
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-                <h3 className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                  Goal
-                </h3>
-                <p className="text-3xl font-bold text-gray-900 dark:text-white">
+              <div className="bg-white rounded-2xl shadow p-6 text-center">
+                <h2 className="text-5xl font-bold text-green-900">
                   {friend.goal}
-                </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  days target
+                </h2>
+                <p className="text-gray-500 text-xl mt-2">
+                  Goal (Days)
                 </p>
               </div>
 
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-                <h3 className="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                  Next Due
-                </h3>
-                <p className="text-sm font-bold text-gray-900 dark:text-white">
+              <div className="bg-white rounded-2xl shadow p-6 text-center">
+                <h2 className="text-3xl font-bold text-green-900">
                   {friend.next_due_date}
+                </h2>
+                <p className="text-gray-500 text-xl mt-2">
+                  Next Due
                 </p>
               </div>
             </div>
 
-            {/* Goal Card */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+            {/* RELATIONSHIP GOAL */}
+            <div className="bg-white rounded-2xl shadow p-6 flex justify-between items-center">
+              <div>
+                <h2 className="text-3xl font-bold text-green-900">
                   Relationship Goal
                 </h2>
-                <button className="text-blue-600 hover:text-blue-800 dark:text-blue-400">
-                  <Edit size={20} />
-                </button>
+                <p className="text-xl mt-2">
+                  Connect every{" "}
+                  <span className="font-bold">
+                    {friend.goal} days
+                  </span>
+                </p>
               </div>
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
-                Keep in touch every {friend.goal} days
-              </p>
-              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                <div
-                  className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                  style={{
-                    width: `${Math.min(
-                      (friend.days_since_contact / friend.goal) * 100,
-                      100
-                    )}%`,
-                  }}
-                />
-              </div>
+
+              <button className="border px-6 py-3 rounded-xl font-semibold hover:bg-gray-50">
+                <Edit size={20} />
+              </button>
             </div>
 
-            {/* Quick Check-In Card */}
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+            {/* QUICK CHECK-IN */}
+            <div className="bg-white rounded-2xl shadow p-6">
+              <h2 className="text-3xl font-bold text-green-900 mb-6">
                 Quick Check-In
               </h2>
-              <div className="grid grid-cols-3 gap-4">
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <button
                   onClick={() => handleInteraction("Call")}
-                  className="flex flex-col items-center gap-2 bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 py-4 px-4 rounded-lg hover:bg-green-200 dark:hover:bg-green-800 transition font-semibold"
+                  className="border rounded-xl py-4 flex flex-col items-center gap-3 text-xl hover:bg-gray-50"
                 >
-                  <Phone size={24} />
-                  <span>Call</span>
+                  <Phone size={28} />
+                  Call
                 </button>
+
                 <button
                   onClick={() => handleInteraction("Text")}
-                  className="flex flex-col items-center gap-2 bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 py-4 px-4 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-800 transition font-semibold"
+                  className="border rounded-xl py-4 flex flex-col items-center gap-3 text-xl hover:bg-gray-50"
                 >
-                  <MessageSquare size={24} />
-                  <span>Text</span>
+                  <MessageSquare size={28} />
+                  Text
                 </button>
+
                 <button
                   onClick={() => handleInteraction("Video")}
-                  className="flex flex-col items-center gap-2 bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 py-4 px-4 rounded-lg hover:bg-purple-200 dark:hover:bg-purple-800 transition font-semibold"
+                  className="border rounded-xl py-4 flex flex-col items-center gap-3 text-xl hover:bg-gray-50"
                 >
-                  <Video size={24} />
-                  <span>Video</span>
+                  <Video size={28} />
+                  Video
                 </button>
               </div>
             </div>

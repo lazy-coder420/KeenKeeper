@@ -29,9 +29,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
             Friends to Keep Close
           </h2>
-          <p className="text-gray-600 dark:text-gray-400">
-            {friends.length} friends • Stay connected and never miss important moments
-          </p>
+ 
         </div>
 
         {friends.length === 0 ? (
