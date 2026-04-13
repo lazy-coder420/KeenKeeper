@@ -1,3 +1,5 @@
+
+"use client";
 import Link from "next/link";
 import { Home, Clock, BarChart3 } from "lucide-react";
 import { usePathname } from "next/navigation";
