@@ -17,6 +17,7 @@ const NavBar = () => {
     { href: "/", label: "Home", icon: Home },
     { href: "/timeline", label: "Timeline", icon: Clock },
     { href: "/stats", label: "Stats", icon: BarChart3 },
+
   ];
 
   return (

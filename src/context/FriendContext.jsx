@@ -10,6 +10,7 @@ export const FriendProvider = ({ children }) => {
   const [timeline, setTimeline] = useState([]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setFriends(friendsData);
 
     const saved =
