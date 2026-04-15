@@ -46,7 +46,7 @@ KeenKeeper is an intuitive friendship management application designed to help yo
 ## 🛠️ Technologies Used
 
 - **Next.js 16** - Web framework
-- **React.js** - UI components
+- **Next.js** - UI components
 - **Tailwind CSS** - Styling
 - **Lucide React** - Icons
 - **Recharts** - Charts & visualizations
@@ -69,7 +69,7 @@ npm install lucide-react recharts
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the app.
+Open (https://keen-keeper-green.vercel.app/) to view the app.
 
 ---
 
